@@ -1,0 +1,8 @@
+/* App container */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Transitions can go here */

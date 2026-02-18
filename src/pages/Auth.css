@@ -1,0 +1,113 @@
+.auth-page {
+    padding: 4rem 10%;
+    min-height: calc(100vh - 80px);
+    background: var(--color-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.auth-page::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--color-primary) 0%, transparent 60%);
+    opacity: 0.1;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 2.5rem;
+    z-index: 10;
+}
+
+.auth-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    color: var(--color-text-dim);
+    font-family: var(--font-display);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: 0.3s;
+}
+
+.auth-tab.active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+.auth-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-dim);
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: #fff;
+    font-family: var(--font-main);
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 10px var(--glow-primary);
+}
+
+.auth-submit {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.auth-submit:hover {
+    transform: scale(1.02);
+    box-shadow: var(--glow-primary);
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 1rem;
+    color: var(--color-text-dim);
+    font-size: 0.8rem;
+}

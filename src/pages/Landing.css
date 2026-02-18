@@ -1,0 +1,321 @@
+.landing-page {
+    position: relative;
+    width: 100vw;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 5%;
+}
+
+.hero-canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 620px;
+    padding: 2.5rem;
+    background: rgba(5, 5, 16, 0.75);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Hero Badge */
+.hero-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(0, 240, 255, 0.08);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    border-radius: 20px;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+    font-family: var(--font-display);
+}
+
+.hero-title {
+    font-size: 3.8rem;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+    font-family: var(--font-display);
+}
+
+.highlight-text {
+    color: var(--color-primary);
+    text-shadow: 0 0 30px rgba(0, 240, 255, 0.6), 0 0 60px rgba(0, 240, 255, 0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-dim);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+}
+
+/* Stat Counters */
+.hero-stats {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.stat-counter {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-size: 1.8rem;
+    font-weight: 800;
+    font-family: var(--font-display);
+    color: var(--color-primary);
+    text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+}
+
+.stat-desc {
+    font-size: 0.7rem;
+    color: var(--color-text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 2px;
+}
+
+/* CTA Buttons */
+.hero-cta {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, var(--color-primary), #0088ff);
+    color: #000;
+    font-weight: 700;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-arrow {
+    transition: transform 0.3s ease;
+}
+
+.btn-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.5);
+}
+
+.btn-cta:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+.btn-secondary {
+    padding: 14px 32px;
+    background: transparent;
+    color: var(--color-primary);
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    font-weight: 700;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 240, 255, 0.08);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+}
+
+/* Floating Orbit Rings */
+.orbit-ring {
+    position: absolute;
+    border: 1px solid rgba(0, 240, 255, 0.08);
+    border-radius: 50%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.ring-1 {
+    width: 500px;
+    height: 500px;
+    top: 10%;
+    right: 5%;
+    animation: orbit-float 20s linear infinite;
+}
+
+.ring-2 {
+    width: 350px;
+    height: 350px;
+    bottom: 20%;
+    right: 15%;
+    animation: orbit-float 15s linear infinite reverse;
+    border-color: rgba(112, 0, 255, 0.08);
+}
+
+.ring-3 {
+    width: 650px;
+    height: 650px;
+    top: -10%;
+    right: -5%;
+    animation: orbit-float 25s linear infinite;
+    border-color: rgba(255, 255, 255, 0.03);
+}
+
+@keyframes orbit-float {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Floating mini decorative dots */
+.floating-dot {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.dot-1 {
+    width: 6px;
+    height: 6px;
+    background: var(--color-primary);
+    top: 25%;
+    right: 30%;
+    animation: float 4s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--color-primary);
+}
+
+.dot-2 {
+    width: 4px;
+    height: 4px;
+    background: var(--color-secondary);
+    top: 60%;
+    right: 20%;
+    animation: float 5s ease-in-out infinite 1s;
+    box-shadow: 0 0 8px var(--color-secondary);
+}
+
+.dot-3 {
+    width: 8px;
+    height: 8px;
+    background: var(--color-accent);
+    bottom: 30%;
+    right: 40%;
+    animation: float 6s ease-in-out infinite 0.5s;
+    box-shadow: 0 0 12px var(--color-accent);
+}
+
+.dot-4 {
+    width: 3px;
+    height: 3px;
+    background: #fff;
+    top: 15%;
+    right: 45%;
+    animation: float 3s ease-in-out infinite 2s;
+    box-shadow: 0 0 6px #fff;
+}
+
+/* Scroll indicator */
+.scrolldown {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.mouse {
+    width: 28px;
+    height: 46px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+    position: relative;
+}
+
+.mouse::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 8px;
+    background: var(--color-primary);
+    border-radius: 2px;
+    animation: scroll 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll {
+    0% {
+        top: 8px;
+        opacity: 1;
+    }
+
+    100% {
+        top: 28px;
+        opacity: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-content {
+        background: rgba(5, 5, 16, 0.9);
+        width: 100%;
+        margin: 0 10px;
+    }
+
+    .hero-stats {
+        gap: 1rem;
+    }
+
+    .stat-number {
+        font-size: 1.3rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+    }
+
+    .btn-cta,
+    .btn-secondary {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .orbit-ring,
+    .floating-dot {
+        display: none;
+    }
+}

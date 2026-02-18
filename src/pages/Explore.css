@@ -1,0 +1,167 @@
+.explore-page {
+    padding: 4rem 8%;
+    min-height: 100vh;
+    background: var(--color-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Star field background */
+.star-field {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.star-particle {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: star-twinkle 3s ease-in-out infinite;
+}
+
+@keyframes star-twinkle {
+
+    0%,
+    100% {
+        opacity: 0.15;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Header */
+.explore-header {
+    margin-bottom: 3rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.explore-header h1 {
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
+    margin-bottom: 0.8rem;
+}
+
+.explore-subtitle {
+    color: var(--color-text-dim);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    opacity: 0.7;
+}
+
+/* Search bar */
+.search-bar {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-icon {
+    position: absolute;
+    left: 18px;
+    font-size: 0.9rem;
+    z-index: 1;
+}
+
+.search-bar input {
+    padding: 14px 20px 14px 44px;
+    width: 100%;
+    border-radius: 25px;
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    background: rgba(5, 5, 16, 0.8);
+    color: #fff;
+    font-family: var(--font-main);
+    outline: none;
+    font-size: 0.95rem;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+}
+
+.search-bar input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.filter-btn {
+    padding: 8px 22px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(112, 0, 255, 0.3);
+    color: rgba(255, 255, 255, 0.6);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.filter-btn:hover {
+    border-color: var(--color-secondary);
+    color: #fff;
+    background: rgba(112, 0, 255, 0.1);
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, rgba(112, 0, 255, 0.3), rgba(0, 240, 255, 0.15));
+    border-color: var(--color-primary);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(112, 0, 255, 0.2);
+}
+
+/* Result count */
+.result-count {
+    font-size: 0.8rem;
+    color: var(--color-text-dim);
+    letter-spacing: 0.5px;
+}
+
+.count-highlight {
+    color: var(--color-primary);
+    font-weight: 700;
+    font-family: var(--font-display);
+}
+
+/* Planet grid */
+.planet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.no-results {
+    text-align: center;
+    color: var(--color-text-dim);
+    font-size: 1.1rem;
+    grid-column: 1 / -1;
+    margin-top: 3rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}

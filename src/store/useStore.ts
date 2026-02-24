@@ -43,7 +43,7 @@ const DEFAULT_SIMULATOR_PARAMS: SimulatorParams = {
     magneticField: 1,
 };
 
-const API_URL = 'http://localhost:3000/api';
+import { API_URL } from '../config';
 
 export const useStore = create<AppState>((set, get) => ({
     user: null,

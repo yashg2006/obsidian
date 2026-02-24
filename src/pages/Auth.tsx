@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
+import { API_URL } from '../config';
 import { motion } from 'framer-motion';
 import './Auth.css';
 
@@ -21,7 +22,7 @@ const Auth: React.FC = () => {
         setLoading(true);
         setError('');
 
-        const endpoint = isLogin ? 'http://localhost:3000/api/auth/login' : 'http://localhost:3000/api/auth/register';
+        const endpoint = isLogin ? `${API_URL}/auth/login` : `${API_URL}/auth/register`;
 
         try {
             const res = await fetch(endpoint, {

@@ -2,9 +2,9 @@
 
 Cosmos is a high-fidelity, full-stack web application designed for interactive 3D exploration and scientific simulation of real NASA exoplanet data.
 
-![Cosmos Banner](https://raw.githubusercontent.com/yashg2006/obsidian/main/public/banner.png) *(Placeholder: Add your own project screenshot here!)*
+![Cosmos Banner](public/banner.png)
 
-## 🚀 Features
+##  Features
 
 ### 🔭 Real-Time 3D Simulation
 - **Scientific Rendering**: Advanced GLSL shaders using Fractal Brownian Motion (FBM) to procedurally generate terrain, oceans, and atmospheric effects.
@@ -13,7 +13,7 @@ Cosmos is a high-fidelity, full-stack web application designed for interactive 3
   - **Glacial Caps**: Realistic ice coverage for cold worlds (<220K).
   - **Dynamic Water**: Real-time sea-level displacement based on surface water percentages.
 
-### 🧪 Habitability Analysis Engine
+###  Habitability Analysis Engine
 - **Multi-Factor Scoring**: Real-time habitability index (0-100%) calculated from:
   - Stellar Classification (O, B, A, F, G, K, M stars)
   - Orbital Distance (AU)
@@ -22,18 +22,18 @@ Cosmos is a high-fidelity, full-stack web application designed for interactive 3
   - Planetary Mass & Radius
 - **Scientific HUD**: A premium, glassmorphism-style interface providing deep telemetry on planetary conditions.
 
-### 📊 Data & Personalization
+###  Data & Personalization
 - **NASA Integration**: Explore real discoveries from the Exoplanet Archive.
 - **Discovery Archive**: Authenticate to save custom planet configurations and theoretical discoveries.
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Frontend**: React 18, Vite, Three.js, React Three Fiber, Framer Motion, Zustand.
 - **Backend**: Node.js, Express, Prisma (SQLite).
 - **Styling**: Vanilla CSS with advanced Glassmorphism and Neon design tokens.
 - **Deployment**: Configured for Render.com.
 
-## 📦 Installation & Setup
+##  Installation & Setup
 
 1. **Clone the repository:**
    ```bash

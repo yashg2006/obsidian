@@ -4,56 +4,37 @@ import { motion } from 'framer-motion';
 import './Controls.css';
 
 const Controls: React.FC = () => {
-    const { simulatorParams, updateSimulatorParams, savePlanet, user } = useStore();
+    const {
+        simulatorParams,
+        updateSimulatorParams,
+        savePlanet,
+        user,
+        habitabilityScore,
+        calculatedTemp
+    } = useStore();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         updateSimulatorParams({ [name]: name === 'starType' ? value : parseFloat(value) });
     };
 
-    // Advanced 6-factor scoring
-    const scoring = useMemo(() => {
+    // Factors for display (derived from params for the UI bars)
+    const factors = useMemo(() => {
         const { distance, planetRadius, atmosphereDensity, surfaceWater, magneticField } = simulatorParams;
-
-        // 1. Distance score (Ideal 1.0 AU)
-        const distScore = Math.max(0, 100 - Math.abs(distance - 1.0) * 80);
-
-        // 2. Size score (Ideal 1.0 Earths)
-        const sizeScore = Math.max(0, 100 - Math.abs(planetRadius - 1.0) * 100);
-
-        // 3. Atmosphere score (Ideal 1.0 Density)
-        const atmScore = Math.max(0, 100 - Math.abs(atmosphereDensity - 1.0) * 50);
-
-        // 4. Water score (Ideal 0.7)
-        const waterScore = Math.max(0, 100 - Math.abs(surfaceWater - 0.7) * 150);
-
-        // 5. Magnetic score (Ideal 1.0)
-        const magScore = magneticField * 100;
-
-        // 6. Temperature (Derived from distance & star - simplified for UI)
-        const tempScore = Math.max(0, 100 - Math.abs(distance - 0.9) * 120);
-
-        const total = Math.round((distScore + sizeScore + atmScore + waterScore + magScore + tempScore) / 6);
-
-        return {
-            total,
-            factors: [
-                { label: 'Orbital Distance', value: distScore, color: '#00f0ff' },
-                { label: 'Planet Mass/Size', value: sizeScore, color: '#7000ff' },
-                { label: 'Atmosphere Density', value: atmScore, color: '#ffaa00' },
-                { label: 'Liquid Water', value: waterScore, color: '#00ff88' },
-                { label: 'Magnetic Shield', value: magScore, color: '#ff0055' },
-                { label: 'Surface Temperature', value: tempScore, color: '#ff6600' }
-            ]
-        };
-    }, [simulatorParams]);
-
-    const { total, factors } = scoring;
+        return [
+            { label: 'Orbital Distance', value: Math.max(0, 100 - Math.abs(distance - 1.0) * 80), color: '#00f0ff' },
+            { label: 'Planet Mass', value: Math.max(0, 100 - Math.abs(planetRadius - 1.0) * 100), color: '#7000ff' },
+            { label: 'Atmosphere', value: Math.max(0, 100 - Math.abs(atmosphereDensity - 1.0) * 50), color: '#ffaa00' },
+            { label: 'Liquid Water', value: surfaceWater * 100, color: '#00ff88' },
+            { label: 'Magnetic Shield', value: magneticField * 100, color: '#ff0055' },
+            { label: 'Temp (Kelvin)', value: Math.min(100, (calculatedTemp / 500) * 100), color: '#ff6600' }
+        ];
+    }, [simulatorParams, calculatedTemp]);
 
     // SVG ring calculations
     const radius = 36;
     const circumference = 2 * Math.PI * radius;
-    const offset = circumference - (total / 100) * circumference;
+    const offset = circumference - (habitabilityScore / 100) * circumference;
 
     return (
         <motion.div
@@ -110,6 +91,9 @@ const Controls: React.FC = () => {
 
             <div className="score-analysis">
                 <div className="overall-score">
+                    <div className="temp-badge" style={{ color: calculatedTemp > 373 ? '#ff4400' : calculatedTemp < 273 ? '#00ccff' : '#00ff88' }}>
+                        {calculatedTemp}K
+                    </div>
                     <svg className="score-ring" width="80" height="80">
                         <circle className="score-ring-bg" cx="40" cy="40" r={radius} />
                         <motion.circle
@@ -118,11 +102,11 @@ const Controls: React.FC = () => {
                             style={{
                                 strokeDasharray: circumference,
                                 strokeDashoffset: offset,
-                                stroke: total > 80 ? '#00ff88' : total > 50 ? '#00f0ff' : '#ff0055'
+                                stroke: habitabilityScore > 80 ? '#00ff88' : habitabilityScore > 50 ? '#00f0ff' : '#ff0055'
                             }}
                         />
                         <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" className="score-text">
-                            {total}
+                            {habitabilityScore}
                         </text>
                     </svg>
                     <span className="score-label">Habitability Index</span>
@@ -155,13 +139,13 @@ const Controls: React.FC = () => {
                             name: `Proxima-${Math.floor(Math.random() * 900 + 100)}`,
                             type: simulatorParams.planetRadius > 1.5 ? 'Super-Earth' : 'Terrestrial',
                             distance: simulatorParams.distance,
-                            mass: Math.pow(simulatorParams.planetRadius, 3), // Rough mass-radius relation
+                            mass: Math.pow(simulatorParams.planetRadius, 3),
                             radius: simulatorParams.planetRadius,
-                            temperature: 288 + (1 - simulatorParams.distance) * 50, // Approximation
+                            temperature: calculatedTemp,
                             discoveryYear: new Date().getFullYear(),
-                            description: `A ${simulatorParams.planetRadius > 1.5 ? 'massive' : 'rocky'} world discovered in the simulator.`,
+                            description: `A ${simulatorParams.planetRadius > 1.5 ? 'massive' : 'rocky'} world discovered with ${habitabilityScore}% habitability.`,
                             color: '#fff',
-                            habitability: total,
+                            habitability: habitabilityScore,
                             atmosphere: simulatorParams.atmosphereDensity > 1 ? 'Thick' : 'Thin'
                         })}
                     >

@@ -103,7 +103,15 @@ const Landing: React.FC = () => {
 
             <div className="hero-canvas-container">
                 <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-                    <Globe color="#00c8ff" size={2} rotationSpeed={0.003} hasClouds={true} surfaceDetail={0.7} />
+                    <Globe
+                        color="#00c8ff"
+                        size={2}
+                        rotationSpeed={0.003}
+                        hasClouds={true}
+                        surfaceWater={0.7}
+                        temperature={288}
+                        atmosphereDensity={1.0}
+                    />
                 </Canvas>
             </div>
 

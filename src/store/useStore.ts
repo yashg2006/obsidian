@@ -24,6 +24,8 @@ interface AppState {
 
     // Simulator State
     simulatorParams: SimulatorParams;
+    habitabilityScore: number;
+    calculatedTemp: number; // in Kelvin
 
     // Actions
     login: (email: string, token: string, user: User) => void;
@@ -43,6 +45,50 @@ const DEFAULT_SIMULATOR_PARAMS: SimulatorParams = {
     magneticField: 1,
 };
 
+const STAR_TEMPERATURES = {
+    O: 40000,
+    B: 20000,
+    A: 8500,
+    F: 6500,
+    G: 5700,
+    K: 4500,
+    M: 3500,
+};
+
+const calculateMetrics = (params: SimulatorParams) => {
+    // 1. Calculate Temperature (simplified Stefan-Boltzmann)
+    // T_p = T_star * sqrt(R_star / 2D) * (1 - albedo)^0.25
+    // We'll simplify: T_p proportional to T_star / sqrt(distance)
+    const baseStarTemp = STAR_TEMPERATURES[params.starType];
+    const temp = (baseStarTemp * 0.05) / Math.sqrt(params.distance);
+
+    // Adjust for atmosphere (greenhouse effect)
+    const finalTemp = temp * (1 + params.atmosphereDensity * 0.2);
+
+    // 2. Calculate Habitability Score (0-100)
+    let score = 0;
+
+    // Temperature Score (Optimized for 288K - Earth like)
+    const tempDiff = Math.abs(finalTemp - 288);
+    const tempScore = Math.max(0, 40 - (tempDiff / 2)); // 40 pts max
+
+    // Water Score (Optimized for 0.4 - 0.8)
+    const waterScore = params.surfaceWater > 0 ? (params.surfaceWater > 0.3 && params.surfaceWater < 0.9 ? 30 : 15) : 0;
+
+    // Atmosphere Score
+    const atmScore = params.atmosphereDensity > 0.4 && params.atmosphereDensity < 1.8 ? 20 : 10;
+
+    // Magnetic Field
+    const magScore = params.magneticField * 10;
+
+    score = tempScore + waterScore + atmScore + magScore;
+
+    return {
+        calculatedTemp: Math.round(finalTemp),
+        habitabilityScore: Math.round(Math.min(100, Math.max(0, score)))
+    };
+};
+
 import { API_URL } from '../config';
 
 export const useStore = create<AppState>((set, get) => ({
@@ -52,6 +98,8 @@ export const useStore = create<AppState>((set, get) => ({
     allPlanets: exoplanets,
 
     simulatorParams: DEFAULT_SIMULATOR_PARAMS,
+    habitabilityScore: 85,
+    calculatedTemp: 288,
 
     login: (email, token, user) => {
         localStorage.setItem('token', token);
@@ -122,7 +170,13 @@ export const useStore = create<AppState>((set, get) => ({
         }
     },
 
-    updateSimulatorParams: (params) => set((state) => ({
-        simulatorParams: { ...state.simulatorParams, ...params }
-    })),
+    updateSimulatorParams: (params) => {
+        const newParams = { ...get().simulatorParams, ...params };
+        const { calculatedTemp, habitabilityScore } = calculateMetrics(newParams);
+        set({
+            simulatorParams: newParams,
+            calculatedTemp,
+            habitabilityScore
+        });
+    },
 }));

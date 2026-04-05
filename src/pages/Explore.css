@@ -1,0 +1,290 @@
+.explore-page {
+    padding: 3rem 6% 0;
+    min-height: 100vh;
+    background: var(--color-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Star field background */
+.star-field {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.star-particle {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: star-twinkle 3s ease-in-out infinite;
+}
+
+/* Header */
+.explore-header {
+    margin-bottom: 2.5rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.explore-header h1 {
+    font-size: 2.8rem;
+    color: #fff;
+    margin-bottom: 0.8rem;
+}
+
+.explore-subtitle {
+    color: var(--color-text-dim);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    opacity: 0.7;
+    font-family: var(--font-accent);
+}
+
+/* Search bar */
+.search-bar {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-icon {
+    position: absolute;
+    left: 18px;
+    z-index: 1;
+    color: var(--color-text-dim);
+}
+
+.search-bar input {
+    padding: 14px 20px 14px 44px;
+    width: 100%;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(10, 10, 25, 0.6);
+    color: #fff;
+    font-family: var(--font-accent);
+    outline: none;
+    font-size: 0.95rem;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+}
+
+.search-bar input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.12);
+    background: rgba(10, 10, 25, 0.8);
+}
+
+/* Controls Row */
+.explore-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    font-family: var(--font-accent);
+}
+
+.filter-btn:hover {
+    border-color: rgba(112, 0, 255, 0.3);
+    color: #fff;
+    background: rgba(112, 0, 255, 0.08);
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, rgba(112, 0, 255, 0.2), rgba(0, 240, 255, 0.1));
+    border-color: var(--color-primary);
+    color: #fff;
+    box-shadow: 0 0 16px rgba(112, 0, 255, 0.15);
+}
+
+/* Sort Controls */
+.sort-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sort-icon {
+    color: var(--color-text-dim);
+}
+
+.sort-select {
+    padding: 8px 12px;
+    background: rgba(10, 10, 25, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    color: #fff;
+    font-family: var(--font-accent);
+    font-size: 0.8rem;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.sort-select:focus {
+    border-color: var(--color-primary);
+}
+
+.sort-dir-btn {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    color: var(--color-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.sort-dir-btn:hover {
+    background: rgba(0, 240, 255, 0.08);
+    border-color: var(--color-primary);
+}
+
+.view-toggle {
+    display: flex;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.view-btn-toggle {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.02);
+    border: none;
+    color: var(--color-text-dim);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.view-btn-toggle.active {
+    background: rgba(0, 240, 255, 0.1);
+    color: var(--color-primary);
+}
+
+.view-btn-toggle:hover {
+    color: #fff;
+}
+
+/* Result count */
+.result-count {
+    font-size: 0.8rem;
+    color: var(--color-text-dim);
+    letter-spacing: 0.5px;
+    font-family: var(--font-accent);
+}
+
+.count-highlight {
+    color: var(--color-primary);
+    font-weight: 700;
+    font-family: var(--font-display);
+}
+
+/* Planet grid */
+.planet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 4rem;
+}
+
+.planet-grid.list-view {
+    grid-template-columns: 1fr;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.no-results {
+    text-align: center;
+    color: var(--color-text-dim);
+    font-size: 1.1rem;
+    grid-column: 1 / -1;
+    margin-top: 3rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    font-family: var(--font-accent);
+}
+
+.header-top-row {
+    margin-bottom: 2rem;
+}
+
+.add-planet-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #00c8ff, #7b2fff);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: var(--font-accent);
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 200, 255, 0.3);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.add-planet-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 200, 255, 0.45);
+}
+
+@media (max-width: 768px) {
+    .explore-controls {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .sort-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}

@@ -1,6 +1,7 @@
 # 🌌 Cosmos: Advanced Exoplanet Simulator
 
 Cosmos is a high-fidelity, full-stack web application designed for interactive 3D exploration and scientific simulation of real NASA exoplanet data.
+Check it live: https://obsidian-1-i6r1.onrender.com/
 
 ![Cosmos Banner](public/banner.png)
 
